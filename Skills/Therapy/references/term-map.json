@@ -1,0 +1,467 @@
+{
+  "version": 1,
+  "description": "코딩 에이전트가 한국어 답변에서 쓰면 안 되는 단어와 대체어. 원칙: 기술 용어는 번역하지 않는다. 억지 순우리말, 도메인 밖 용어(회계·행정·법률), 직역 관용구를 걸러낸다.",
+  "principle": "영어 기술 용어는 한국 개발자가 실제로 쓰는 표기(외래어 표기 또는 영문)를 그대로 쓴다. 고유어로 풀어쓰지 않는다.",
+  "terms": [
+    {
+      "id": "branch",
+      "bad": "갈래",
+      "pattern": "(?<![가-힣])갈래",
+      "good": "브랜치",
+      "category": "억지 순우리말",
+      "severity": "error",
+      "note": "git branch. 분기 로직이면 '분기'.",
+      "auto": true
+    },
+    {
+      "id": "metric",
+      "bad": "잣대",
+      "pattern": "(?<![가-힣])잣대",
+      "good": "기준 / 지표",
+      "category": "억지 순우리말",
+      "severity": "error",
+      "note": "metric은 '지표', criterion은 '기준'.",
+      "auto": false
+    },
+    {
+      "id": "package",
+      "bad": "꾸러미",
+      "pattern": "(?<![가-힣])꾸러미",
+      "good": "패키지",
+      "category": "억지 순우리말",
+      "severity": "error",
+      "note": "package / bundle.",
+      "auto": true
+    },
+    {
+      "id": "tag",
+      "bad": "꼬리표",
+      "pattern": "(?<![가-힣])꼬리표",
+      "good": "태그",
+      "category": "억지 순우리말",
+      "severity": "error",
+      "note": "tag / label.",
+      "auto": true
+    },
+    {
+      "id": "structure",
+      "bad": "얼개",
+      "pattern": "(?<![가-힣])얼개",
+      "good": "구조",
+      "category": "억지 순우리말",
+      "severity": "error",
+      "note": "structure / architecture.",
+      "auto": true
+    },
+    {
+      "id": "payload",
+      "bad": "알맹이",
+      "pattern": "(?<![가-힣])알맹이",
+      "good": "페이로드 / 본문",
+      "category": "억지 순우리말",
+      "severity": "error",
+      "note": "payload / body.",
+      "auto": false
+    },
+    {
+      "id": "wrapper",
+      "bad": "껍데기",
+      "pattern": "(?<![가-힣])껍데기",
+      "good": "래퍼",
+      "category": "억지 순우리말",
+      "severity": "error",
+      "note": "wrapper / shell.",
+      "auto": false
+    },
+    {
+      "id": "capture",
+      "bad": "갈무리",
+      "pattern": "(?<![가-힣])갈무리",
+      "good": "저장 / 캡처",
+      "category": "억지 순우리말",
+      "severity": "error",
+      "note": "save / capture.",
+      "auto": false
+    },
+    {
+      "id": "entrypoint",
+      "bad": "들머리",
+      "pattern": "(?<![가-힣])들머리",
+      "good": "진입점",
+      "category": "억지 순우리말",
+      "severity": "error",
+      "note": "entry point.",
+      "auto": true
+    },
+    {
+      "id": "axis",
+      "bad": "축",
+      "pattern": "(?<![가-힣])축(?=[을를이가은는의에와과로도만\\s,.)\\]]|$)",
+      "good": "axis / 축(그래프 맥락만)",
+      "category": "번역 과잉",
+      "severity": "warn",
+      "note": "matplotlib·수학 좌표축이면 '축' 허용. 그 외 axis 인자·차원 의미면 원어.",
+      "auto": false
+    },
+    {
+      "id": "row",
+      "bad": "행",
+      "pattern": "(?<![가-힣])행(?=[을를이가은는의에와과로도만\\s,.)\\]]|$)",
+      "good": "줄 / 라인 (표·DB면 '행' 허용)",
+      "category": "번역 과잉",
+      "severity": "warn",
+      "note": "코드 한 줄을 가리키면 '줄'. 테이블 row면 '행'이 맞다.",
+      "auto": false
+    },
+    {
+      "id": "split",
+      "bad": "가르다",
+      "pattern": "(?<![가-힣])(?:가르다|가르고|가르는|갈라서|갈라|가른)(?![가-힣])",
+      "good": "나누다 / 분할하다 / split",
+      "category": "억지 순우리말",
+      "severity": "error",
+      "note": "split / partition.",
+      "auto": false
+    },
+    {
+      "id": "fold",
+      "bad": "접다",
+      "pattern": "(?<![가-힣])접(?:다|고|어|은|힌|기)(?![가-힣])",
+      "good": "접기(UI) / fold / 축약",
+      "category": "번역 과잉",
+      "severity": "warn",
+      "note": "UI collapse는 '접기'가 자연스럽다. reduce·fold 연산이면 원어.",
+      "auto": false
+    },
+    {
+      "id": "measure",
+      "bad": "재다",
+      "pattern": "(?<![가-힣])(?:재다|재는|재어|잰)(?![가-힣])",
+      "good": "측정하다",
+      "category": "억지 순우리말",
+      "severity": "error",
+      "note": "measure / benchmark.",
+      "auto": false
+    },
+    {
+      "id": "scan",
+      "bad": "훑다",
+      "pattern": "(?<![가-힣])훑",
+      "good": "스캔하다 / 순회하다",
+      "category": "억지 순우리말",
+      "severity": "error",
+      "note": "scan / traverse / iterate.",
+      "auto": false
+    },
+    {
+      "id": "belongs",
+      "bad": "소속",
+      "pattern": "(?<![가-힣])소속",
+      "good": "속한 / 포함된",
+      "category": "도메인 밖",
+      "severity": "warn",
+      "note": "조직 소속이 아니라 데이터 귀속이면 '속한'.",
+      "auto": false
+    },
+    {
+      "id": "share",
+      "bad": "몫",
+      "pattern": "(?<![가-힣])몫",
+      "good": "할당량 / 지분 (나눗셈이면 '몫' 허용)",
+      "category": "번역 과잉",
+      "severity": "warn",
+      "note": "quota / share를 '몫'으로 옮기지 않는다. quotient면 허용.",
+      "auto": false
+    },
+    {
+      "id": "ledger",
+      "bad": "원장",
+      "pattern": "(?<![가-힣])원장",
+      "good": "로그 / 레코드 / ledger",
+      "category": "도메인 밖",
+      "severity": "error",
+      "note": "회계 용어다. 데이터 원본이면 '원본 데이터'.",
+      "auto": false
+    },
+    {
+      "id": "register",
+      "bad": "대장",
+      "pattern": "(?<![가-힣])대장(?![부군])",
+      "good": "목록 / 레지스트리",
+      "category": "도메인 밖",
+      "severity": "error",
+      "note": "행정 용어다.",
+      "auto": false
+    },
+    {
+      "id": "reconcile",
+      "bad": "대사",
+      "pattern": "(?<![가-힣])대사(?![관님])",
+      "good": "대조 / 검증",
+      "category": "도메인 밖",
+      "severity": "error",
+      "note": "회계 reconciliation. 코드에선 '대조'.",
+      "auto": false
+    },
+    {
+      "id": "attribute-to",
+      "bad": "귀속",
+      "pattern": "(?<![가-힣])귀속",
+      "good": "할당 / 연결",
+      "category": "도메인 밖",
+      "severity": "warn",
+      "note": "회계·법률 용어다.",
+      "auto": false
+    },
+    {
+      "id": "copy",
+      "bad": "사본",
+      "pattern": "(?<![가-힣])사본",
+      "good": "복사본",
+      "category": "도메인 밖",
+      "severity": "warn",
+      "note": "문서 행정 용어다. 파일이면 '복사본'.",
+      "auto": true
+    },
+    {
+      "id": "two-copies",
+      "bad": "두 벌 / 한 벌",
+      "pattern": "(?:한|두|세|네)\\s*벌(?![레])",
+      "good": "복사본 2개 / 인스턴스 2개",
+      "category": "억지 순우리말",
+      "severity": "error",
+      "note": "copy 수량은 '개'로 센다.",
+      "auto": false
+    },
+    {
+      "id": "voucher",
+      "bad": "전표",
+      "pattern": "(?<![가-힣])전표",
+      "good": "레코드 / 항목",
+      "category": "도메인 밖",
+      "severity": "error",
+      "note": "회계 용어다.",
+      "auto": false
+    },
+    {
+      "id": "settle",
+      "bad": "소명",
+      "pattern": "(?<![가-힣])소명",
+      "good": "설명 / 근거 제시",
+      "category": "도메인 밖",
+      "severity": "error",
+      "note": "법률·감사 용어다.",
+      "auto": true
+    },
+    {
+      "id": "approval",
+      "bad": "품의",
+      "pattern": "(?<![가-힣])품의",
+      "good": "요청 / 승인 요청",
+      "category": "도메인 밖",
+      "severity": "error",
+      "note": "사무 행정 용어다.",
+      "auto": true
+    },
+    {
+      "id": "aforementioned",
+      "bad": "상기 / 하기 / 금번 / 익일 / 제반",
+      "pattern": "(?<![가-힣])(?:상기|하기|금번|익일|제반)(?=[\\s의를을])",
+      "good": "위 / 아래 / 이번 / 다음 날 / 모든",
+      "category": "공문서투",
+      "severity": "error",
+      "note": "공문서투다. 평어로 쓴다.",
+      "auto": false
+    },
+    {
+      "id": "silver-bullet",
+      "bad": "은탄환",
+      "pattern": "은\\s?탄환|은색\\s?총알",
+      "good": "만능 해법",
+      "category": "직역 관용구",
+      "severity": "error",
+      "note": "silver bullet의 직역이다.",
+      "auto": false
+    },
+    {
+      "id": "reinvent-wheel",
+      "bad": "바퀴를 다시 발명",
+      "pattern": "바퀴를\\s?(?:다시\\s?)?(?:발명|재발명)",
+      "good": "이미 있는 것을 다시 만드는",
+      "category": "직역 관용구",
+      "severity": "error",
+      "note": "reinvent the wheel의 직역이다.",
+      "auto": false
+    },
+    {
+      "id": "elephant-room",
+      "bad": "방 안의 코끼리",
+      "pattern": "방\\s?안의?\\s?코끼리",
+      "good": "다들 알면서 말하지 않는 문제",
+      "category": "직역 관용구",
+      "severity": "error",
+      "note": "elephant in the room의 직역이다.",
+      "auto": false
+    },
+    {
+      "id": "low-hanging",
+      "bad": "낮게 매달린 과일",
+      "pattern": "낮(?:게|은\\s?곳에)\\s?매달린\\s?(?:과일|열매)",
+      "good": "가장 쉬운 작업",
+      "category": "직역 관용구",
+      "severity": "error",
+      "note": "low-hanging fruit의 직역이다.",
+      "auto": false
+    },
+    {
+      "id": "heavy-lifting",
+      "bad": "무거운 짐을 들어",
+      "pattern": "무거운\\s?짐을\\s?들",
+      "good": "실제 처리를 맡는",
+      "category": "직역 관용구",
+      "severity": "error",
+      "note": "heavy lifting의 직역이다.",
+      "auto": false
+    },
+    {
+      "id": "dip-toe",
+      "bad": "발을 담그다",
+      "pattern": "발을\\s?담[그근가]",
+      "good": "가볍게 시작하다",
+      "category": "직역 관용구",
+      "severity": "warn",
+      "note": "dip a toe의 직역이다.",
+      "auto": false
+    },
+    {
+      "id": "bite-sized",
+      "bad": "한 입 크기",
+      "pattern": "한\\s?입\\s?크기",
+      "good": "작게 쪼갠",
+      "category": "직역 관용구",
+      "severity": "error",
+      "note": "bite-sized의 직역이다.",
+      "auto": false
+    },
+    {
+      "id": "journey",
+      "bad": "여정",
+      "pattern": "(?<![가-힣])여정",
+      "good": "과정 / 단계",
+      "category": "직역 관용구",
+      "severity": "warn",
+      "note": "journey의 직역이다. 실제 여행이 아니면 쓰지 않는다.",
+      "auto": false
+    },
+    {
+      "id": "have-meaning",
+      "bad": "~을 가집니다",
+      "pattern": "(?:을|를)\\s?가(?:집니다|진다|지고\\s?있)",
+      "good": "~입니다 / ~이 있습니다",
+      "category": "번역투",
+      "severity": "error",
+      "note": "have의 직역이다.",
+      "auto": false
+    },
+    {
+      "id": "need-to",
+      "bad": "~할 필요가 있습니다",
+      "pattern": "할\\s?필요가\\s?있습니다",
+      "good": "~해야 합니다",
+      "category": "번역투",
+      "severity": "warn",
+      "note": "need to의 직역이다.",
+      "auto": "해야 합니다"
+    },
+    {
+      "id": "one-of-the",
+      "bad": "~중 하나입니다",
+      "pattern": "중\\s?하나입니다",
+      "good": "(삭제하거나 구체적으로)",
+      "category": "번역투",
+      "severity": "warn",
+      "note": "one of the의 직역이다.",
+      "auto": false
+    },
+    {
+      "id": "double-passive",
+      "bad": "보여집니다",
+      "pattern": "보여집니다",
+      "good": "보입니다",
+      "category": "번역투",
+      "severity": "error",
+      "note": "이중 피동이다.",
+      "auto": true
+    },
+    {
+      "id": "become-passive",
+      "bad": "~되어집니다",
+      "pattern": "되어(?:집니다|진다|져\\s?있)",
+      "good": "~됩니다",
+      "category": "번역투",
+      "severity": "error",
+      "note": "이중 피동이다.",
+      "auto": false
+    },
+    {
+      "id": "through",
+      "bad": "~을 통해 ~이 가능",
+      "pattern": "을\\s?통해\\s?[가-힣]+이\\s?가능",
+      "good": "~하면 ~할 수 있습니다",
+      "category": "번역투",
+      "severity": "warn",
+      "note": "through의 직역이다.",
+      "auto": false
+    },
+    {
+      "id": "regarding",
+      "bad": "~에 대하여 / 해당 ~에 대한",
+      "pattern": "(?:에\\s?대하여|해당\\s?[가-힣]+에\\s?대한)",
+      "good": "주어를 바로 쓴다",
+      "category": "번역투",
+      "severity": "warn",
+      "note": "regarding의 직역이다.",
+      "auto": false
+    },
+    {
+      "id": "progress-verb",
+      "bad": "~을 진행하였습니다",
+      "pattern": "진행(?:하였습니다|했습니다)",
+      "good": "고쳤습니다 / 추가했습니다",
+      "category": "번역투",
+      "severity": "warn",
+      "note": "실제 동작을 가린다.",
+      "auto": false
+    },
+    {
+      "id": "overclaim",
+      "bad": "성공적으로 / 완벽하게 / 문제없이",
+      "pattern": "(?:성공적으로|완벽하게|문제없이|이제\\s?모든\\s?것이)",
+      "good": "(삭제)",
+      "category": "과장",
+      "severity": "error",
+      "note": "상태를 그대로 적는다.",
+      "auto": false
+    },
+    {
+      "id": "generic-knowledge",
+      "bad": "일반적으로 / 보통 이런 경우",
+      "pattern": "(?:일반적으로|보통\\s?이런\\s?경우|통상적으로)",
+      "good": "이 저장소의 근거를 적는다",
+      "category": "근거",
+      "severity": "error",
+      "note": "일반론으로 코드베이스의 사실을 대체하지 않는다.",
+      "auto": false
+    },
+    {
+      "id": "emoji",
+      "bad": "이모지",
+      "pattern": "[✅❌✨⚠🌀-🧿]",
+      "good": "(삭제)",
+      "category": "형식",
+      "severity": "error",
+      "note": "쓰지 않는다.",
+      "auto": ""
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "_comment": "팀에서 추가하거나 끌 규칙. term-map.json의 같은 id를 덮어쓴다. severity를 \"off\"로 주면 그 규칙을 끈다. 검사할 때 --terms ~/.therapy/team-terms.json으로 넘긴다.",
+  "version": 1,
+  "terms": [
+    {
+      "id": "row",
+      "severity": "off",
+      "_why": "예시 — 우리 팀은 테이블 작업이 많아 '행'을 그대로 쓴다. 이 줄을 지우면 다시 켜진다."
+    },
+    {
+      "id": "example-team-term",
+      "bad": "우리 팀에서 금지한 단어",
+      "pattern": "(?<![가-힣])우리 팀에서 금지한 단어",
+      "good": "대신 쓸 표기",
+      "category": "팀 규칙",
+      "severity": "error",
+      "note": "왜 금지인지 한 줄.",
+      "auto": false
+    }
+  ]
+}
